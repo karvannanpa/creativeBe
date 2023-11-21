@@ -15,10 +15,11 @@ header nav {
   align-items: center;
   gap: 0 2em;
   margin: auto;
-  max-width: 1264px;
+  max-width: var(--max-with);
   height: var(--nav-height);
-  padding: 0 1rem;
+  padding: 0;
   font-family: var(--body-font-family);
+  position: relative;
 }
 
 header nav[aria-expanded="true"] {
@@ -32,7 +33,7 @@ header nav[aria-expanded="true"] {
 
 @media (min-width: 600px) {
   header nav {
-    padding: 0 2rem;
+    padding: 0 24px;
   }
 }
 
@@ -50,7 +51,9 @@ header nav[aria-expanded="true"] {
 
 header nav p {
   margin: 0;
-  line-height: 1;
+  line-height: 0;
+  display: flex;
+  padding-right: 40px;
 }
 
 header nav a:any-link {
@@ -59,14 +62,15 @@ header nav a:any-link {
 
 /* hamburger */
 header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
+  height: 24px;
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 24px;
 }
 
 header nav .nav-hamburger button {
-  height: 22px;
+  height: 24px;
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -132,10 +136,10 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
 }
 
 @media (min-width: 900px) {
-  header nav .nav-hamburger {
+  /* header nav .nav-hamburger {
     display: none;
     visibility: hidden;
-  }
+  } */
 }
 
 /* brand */
@@ -152,124 +156,27 @@ header nav .nav-brand img {
   height: auto;
 }
 
-/* sections */
-header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
-  display: none;
-  visibility: hidden;
-  background-color: var(--overlay-color);
-}
-
-header nav[aria-expanded="true"] .nav-sections {
-  display: block;
-  visibility: visible;
-  align-self: start;
-}
-
-header nav .nav-sections ul  {
-  list-style: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-s);
-  font-weight: 500;
-}
-
-header nav .nav-sections ul > li {
-  font-weight: 700;
-}
-
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 500;
-}
-
-@media (min-width: 900px) {
-  header nav .nav-sections {
-    display: block;
-    visibility: visible;
-    white-space: nowrap;
-  }
-
-  header nav[aria-expanded="true"] .nav-sections {
-    align-self: unset;
-  }
-
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: .5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
-    top: unset;
-    bottom: .5em;
-    transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
-    display: flex;
-    gap: 2em;
-    margin: 0;
-    font-size: var(--body-font-size-xs);
-  }
-
-  header nav .nav-sections > ul > li {
-    flex: 0 1 auto;
-    position: relative;
-    font-weight: 500;
-  }
-
-  header nav .nav-sections > ul > li > ul {
-    display: none;
-    position: relative;
-  }
-
-  header nav .nav-sections > ul > li[aria-expanded="true"] > ul {
-    display: block;
-    position: absolute;
-    left: -1em;
-    width: 200px;
-    margin-top: 12px;
-    padding: 1em;
-    background-color: var(--highlight-background-color);
-    white-space: initial;
-  }
-
-  header nav .nav-sections > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 8px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--highlight-background-color);
-  }
-
-  header nav .nav-sections > ul > li > ul > li {
-    padding: 8px 0;
-  }
-}
 
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+/* section */
+
+header .nav-sections {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  left: 50%;
+  background: #000000;
+  transform: translateX(-50%);
+  top: -100%;
+  max-width: var(--max-with);
+  height: 100vh;
+  z-index: 3;
+}
+header .nav-sections.active {
+  display: block;
+  top: 120px;
 }
